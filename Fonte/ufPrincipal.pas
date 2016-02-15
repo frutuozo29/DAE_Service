@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, uFTDI, ufInicio, Vcl.AppEvnts;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, uFTDI, ufInicio, Vcl.AppEvnts, FireDAC.UI.Intf,
+  FireDAC.VCLUI.Error, FireDAC.Stan.Error, FireDAC.Stan.Intf, FireDAC.Comp.UI;
 
 type
   TfPrincipal = class(TForm)
@@ -15,11 +16,15 @@ type
     btnPararServico: TButton;
     AppEvents: TApplicationEvents;
     TrayIcon: TTrayIcon;
-    Timer1: TTimer;
+    TimerExecucao: TTimer;
+    btnConfigBD: TButton;
+    btnConfigAPI: TButton;
+    FDGUIxErrorDialog1: TFDGUIxErrorDialog;
     procedure FormCreate(Sender: TObject);
     procedure AppEventsMinimize(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
     procedure onGrupoExpande(Sender: TObject);
+    procedure btnConfigBDClick(Sender: TObject);
   private
     FFTDI: TFTDI;
 
@@ -32,9 +37,14 @@ type
 var
   fPrincipal: TfPrincipal;
 
+const
+  WM_CLOSE_TAB = WM_USER + 1;
+
 implementation
 
 {$R *.dfm}
+
+uses ufrmConexaoBD;
 
 procedure TfPrincipal.AppEventsMinimize(Sender: TObject);
 begin
@@ -43,6 +53,11 @@ begin
   TrayIcon.Visible := True;
   TrayIcon.Animate := True;
   TrayIcon.ShowBalloonHint;
+end;
+
+procedure TfPrincipal.btnConfigBDClick(Sender: TObject);
+begin
+  FTDI.GetTDI.MostrarFormulario(TfrmConexaoBD, False);
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);

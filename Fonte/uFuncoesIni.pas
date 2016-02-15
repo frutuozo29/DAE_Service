@@ -9,22 +9,9 @@ type
   public
     class function LerIni(AKey1, AKey2: String; AValorDefault: String = ''): String;
     class procedure GravarIni(AKey1, AKey2, AValor: String);
-    class procedure CriaFileIni;
   end;
 
 implementation
-
-class procedure TFuncoesIni.CriaFileIni;
-var
-  Arquivo: String;
-begin
-  Arquivo := gsAppPath + gsAppName + '.ini';
-  if not FileExists(Arquivo) then
-  begin
-    TFuncoesIni.GravarIni('SERVIDOR', 'IP', '127.0.0.1');
-    TFuncoesIni.GravarIni('SERVIDOR', 'PORTA', '8181');
-  end;
-end;
 
 class function TFuncoesIni.LerIni(AKey1, AKey2: String;
   AValorDefault: String = ''): String;

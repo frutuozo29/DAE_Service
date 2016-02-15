@@ -13,14 +13,19 @@ uses
   uSeguranca in '..\Fonte\uSeguranca.pas',
   uUtils in '..\Fonte\uUtils.pas',
   Vcl.Themes,
-  Vcl.Styles;
+  Vcl.Styles,
+  ufrmStandard in '..\Fonte\ufrmStandard.pas' {frmStandard},
+  ufrmBasic in '..\Fonte\ufrmBasic.pas' {frmBasic},
+  ufrmConexaoBD in '..\Fonte\ufrmConexaoBD.pas' {frmConexaoBD},
+  uDMConexao in '..\Fonte\uDMConexao.pas' {DMConexao: TDataModule};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Luna');
+  TStyleManager.TrySetStyle('Ruby Graphite');
+  Application.CreateForm(TDMConexao, DMConexao);
   Application.CreateForm(TfPrincipal, fPrincipal);
   Application.Run;
 end.
