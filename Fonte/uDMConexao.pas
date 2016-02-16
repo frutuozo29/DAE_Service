@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
   FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB, FireDAC.Comp.Client,
   FireDAC.Phys.MSSQLDef, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Phys.FB, FireDAC.Phys.ODBCBase,
-  FireDAC.Phys.MSSQL;
+  FireDAC.Phys.MSSQL, FireDAC.VCLUI.Wait, FireDAC.Stan.StorageBin, FireDAC.Stan.StorageXML, FireDAC.Stan.StorageJSON,
+  FireDAC.Comp.UI;
 
 type
   TDataBaseType = (tdbFirebird, tdbSQLServer);
@@ -16,6 +17,10 @@ type
     FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     FDConn: TFDConnection;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDStanStorageJSONLink1: TFDStanStorageJSONLink;
+    FDStanStorageXMLLink1: TFDStanStorageXMLLink;
+    FDStanStorageBinLink1: TFDStanStorageBinLink;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -20,15 +20,20 @@ type
     btnConfigBD: TButton;
     btnConfigAPI: TButton;
     FDGUIxErrorDialog1: TFDGUIxErrorDialog;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure AppEventsMinimize(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
     procedure onGrupoExpande(Sender: TObject);
     procedure btnConfigBDClick(Sender: TObject);
+    procedure btnConfigAPIClick(Sender: TObject);
+    procedure btnIniciarServicoClick(Sender: TObject);
+    procedure btnPararServicoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
-    FFTDI: TFTDI;
-
     { Private declarations }
+    FFTDI: TFTDI;
+    procedure Status;
   public
     { Public declarations }
     property FTDI: TFTDI read FFTDI write FFTDI;
@@ -44,7 +49,7 @@ implementation
 
 {$R *.dfm}
 
-uses ufrmConexaoBD;
+uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi;
 
 procedure TfPrincipal.AppEventsMinimize(Sender: TObject);
 begin
@@ -55,14 +60,43 @@ begin
   TrayIcon.ShowBalloonHint;
 end;
 
+procedure TfPrincipal.btnConfigAPIClick(Sender: TObject);
+begin
+  FTDI.GetTDI.MostrarFormulario(TfrmConfigAPI, False);
+end;
+
 procedure TfPrincipal.btnConfigBDClick(Sender: TObject);
 begin
   FTDI.GetTDI.MostrarFormulario(TfrmConexaoBD, False);
 end;
 
+procedure TfPrincipal.btnIniciarServicoClick(Sender: TObject);
+begin
+  if not GetAplicacao.StatusDoServico then
+  begin
+    GetAplicacao.StatusDoServico := True;
+    Status;
+  end;
+end;
+
+procedure TfPrincipal.btnPararServicoClick(Sender: TObject);
+begin
+  if GetAplicacao.StatusDoServico then
+  begin
+    GetAplicacao.StatusDoServico := False;
+    Status;
+  end;
+end;
+
+procedure TfPrincipal.Button1Click(Sender: TObject);
+begin
+  DMApi.ExecutarIntegracao;
+end;
+
 procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
   FTDI := TFTDI.create(Self, TfInicio);
+  Status;
 end;
 
 procedure TfPrincipal.TrayIconDblClick(Sender: TObject);
@@ -79,6 +113,15 @@ begin
   TCategoryPanel(Sender).OnExpand := nil;
   TCategoryPanel(Sender).Expand;
   TCategoryPanel(Sender).OnExpand := onGrupoExpande;
+end;
+
+procedure TfPrincipal.Status;
+var
+  aStatus: Boolean;
+begin
+  aStatus := GetAplicacao.StatusDoServico;
+  btnIniciarServico.Enabled := not aStatus;
+  btnPararServico.Enabled := aStatus;
 end;
 
 end.

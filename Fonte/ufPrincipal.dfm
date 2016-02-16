@@ -33,7 +33,7 @@ object fPrincipal: TfPrincipal
     object cpConfiguracoes: TCategoryPanel
       AlignWithMargins = True
       Top = 120
-      Height = 111
+      Height = 225
       Caption = 'Configura'#231#245'es'
       TabOrder = 1
       OnExpand = onGrupoExpande
@@ -55,6 +55,16 @@ object fPrincipal: TfPrincipal
         Align = alTop
         Caption = 'Configura'#231#245'es da API'
         TabOrder = 1
+        OnClick = btnConfigAPIClick
+      end
+      object Button1: TButton
+        Left = 51
+        Top = 126
+        Width = 75
+        Height = 25
+        Caption = 'Button1'
+        TabOrder = 2
+        OnClick = Button1Click
       end
     end
     object cpInicializacao: TCategoryPanel
@@ -74,6 +84,7 @@ object fPrincipal: TfPrincipal
         Align = alTop
         Caption = 'Iniciar Servi'#231'o'
         TabOrder = 0
+        OnClick = btnIniciarServicoClick
         ExplicitWidth = 196
       end
       object btnPararServico: TButton
@@ -84,6 +95,7 @@ object fPrincipal: TfPrincipal
         Align = alTop
         Caption = 'Parar Servi'#231'o'
         TabOrder = 1
+        OnClick = btnPararServicoClick
         ExplicitWidth = 196
       end
     end

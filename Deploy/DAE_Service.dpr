@@ -17,7 +17,11 @@ uses
   ufrmStandard in '..\Fonte\ufrmStandard.pas' {frmStandard},
   ufrmBasic in '..\Fonte\ufrmBasic.pas' {frmBasic},
   ufrmConexaoBD in '..\Fonte\ufrmConexaoBD.pas' {frmConexaoBD},
-  uDMConexao in '..\Fonte\uDMConexao.pas' {DMConexao: TDataModule};
+  uDMConexao in '..\Fonte\uDMConexao.pas' {DMConexao: TDataModule},
+  ufrmConfigAPI in '..\Fonte\ufrmConfigAPI.pas' {frmConfigAPI},
+  uAplicacao in '..\Fonte\uAplicacao.pas',
+  uDMApi in '..\Fonte\uDMApi.pas' {DMApi: TDataModule},
+  uClassesAPI in '..\Fonte\uClassesAPI.pas';
 
 {$R *.res}
 
@@ -27,5 +31,7 @@ begin
   TStyleManager.TrySetStyle('Ruby Graphite');
   Application.CreateForm(TDMConexao, DMConexao);
   Application.CreateForm(TfPrincipal, fPrincipal);
+  Application.CreateForm(TfrmConfigAPI, frmConfigAPI);
+  Application.CreateForm(TDMApi, DMApi);
   Application.Run;
 end.

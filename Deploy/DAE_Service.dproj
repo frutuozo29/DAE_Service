@@ -110,6 +110,17 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\Fonte\ufrmConfigAPI.pas">
+            <Form>frmConfigAPI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\Fonte\uAplicacao.pas"/>
+        <DCCReference Include="..\Fonte\uDMApi.pas">
+            <Form>DMApi</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\Fonte\uClassesAPI.pas"/>
         <BuildConfiguration Include="Debug">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
