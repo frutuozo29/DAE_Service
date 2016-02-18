@@ -56,8 +56,7 @@ begin
   try
     idHTTP.Request.Method          := 'POST';
     idHTTP.Request.ContentType     := 'application/json';
-    idHTTP.Request.ContentEncoding := 'utf-8';
-
+    idHTTP.Request.ContentEncoding := 'UTF-8';
     try
       Response := idHTTP.Post('http://webapiaccord.elasticbeanstalk.com/Accord/api/Empresa/CadastrarEmpresaComNotaFiscal', JsonToSend);
       Lista.Add(Response);

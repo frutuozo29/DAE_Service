@@ -28,8 +28,6 @@ object fPrincipal: TfPrincipal
     HeaderFont.Name = 'Tahoma'
     HeaderFont.Style = []
     TabOrder = 0
-    ExplicitTop = -8
-    ExplicitHeight = 469
     object cpConfiguracoes: TCategoryPanel
       AlignWithMargins = True
       Top = 120
@@ -85,7 +83,6 @@ object fPrincipal: TfPrincipal
         Caption = 'Iniciar Servi'#231'o'
         TabOrder = 0
         OnClick = btnIniciarServicoClick
-        ExplicitWidth = 196
       end
       object btnPararServico: TButton
         Left = 0
@@ -96,7 +93,6 @@ object fPrincipal: TfPrincipal
         Caption = 'Parar Servi'#231'o'
         TabOrder = 1
         OnClick = btnPararServicoClick
-        ExplicitWidth = 196
       end
     end
   end
@@ -116,12 +112,12 @@ object fPrincipal: TfPrincipal
   end
   object TimerExecucao: TTimer
     Interval = 9000
-    Left = 264
-    Top = 128
+    Left = 464
+    Top = 32
   end
   object FDGUIxErrorDialog1: TFDGUIxErrorDialog
     Provider = 'Forms'
-    Left = 296
-    Top = 176
+    Left = 320
+    Top = 72
   end
 end

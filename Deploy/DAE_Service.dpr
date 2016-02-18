@@ -21,7 +21,8 @@ uses
   ufrmConfigAPI in '..\Fonte\ufrmConfigAPI.pas' {frmConfigAPI},
   uAplicacao in '..\Fonte\uAplicacao.pas',
   uDMApi in '..\Fonte\uDMApi.pas' {DMApi: TDataModule},
-  uClassesAPI in '..\Fonte\uClassesAPI.pas';
+  uClassesAPI in '..\Fonte\uClassesAPI.pas',
+  uLogExecucao in '..\Fonte\uLogExecucao.pas';
 
 {$R *.res}
 
