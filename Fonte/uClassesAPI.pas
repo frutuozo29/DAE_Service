@@ -8,7 +8,7 @@ type
     FNome: String;
     FCNPJ: String;
     FEmail: String;
-  published
+  public
     property Nome: String read FNome write FNome;
     property CNPJ: String read FCNPJ write FCNPJ;
     property Email: String read FEmail write FEmail;
@@ -22,7 +22,7 @@ type
   public
     constructor Create;
     procedure AddElementOnArray(aElement: String);
-  published
+
     property Empresa: TEmpresa read FEmpresa write FEmpresa;
     property NumerosDasNotasFiscais: TArray<String> read FNumerosDasNotasFiscais write FNumerosDasNotasFiscais;
   end;

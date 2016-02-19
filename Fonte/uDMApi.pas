@@ -82,7 +82,7 @@ end;
 
 procedure TDMApi.PrepararEnviarJson;
 var
-  Json, Empresa: String;
+  Empresa: String;
   ArrayJSon:TJSONArray;
   EmpresaNotas: TEmpresaNotas;
   Lista: TStringList;

@@ -49,7 +49,7 @@ implementation
 
 {$R *.dfm}
 
-uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi;
+uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi, uRegistry, IwSystem;
 
 procedure TfPrincipal.AppEventsMinimize(Sender: TObject);
 begin
@@ -97,6 +97,8 @@ procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
   FTDI := TFTDI.create(Self, TfInicio);
   Status;
+
+  TRegistro.RunOnStartup('DAEService', gsAppPath + gsAppName + '.exe');
 end;
 
 procedure TfPrincipal.TrayIconDblClick(Sender: TObject);

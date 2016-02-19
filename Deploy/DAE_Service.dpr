@@ -2,6 +2,8 @@ program DAE_Service;
 
 uses
   Vcl.Forms,
+  Vcl.Themes,
+  Vcl.Styles,
   cTDI in '..\Fonte\cTDI.pas',
   uCripto in '..\Fonte\uCripto.pas',
   ufInicio in '..\Fonte\ufInicio.pas' {fInicio},
@@ -12,8 +14,6 @@ uses
   uRegistry in '..\Fonte\uRegistry.pas',
   uSeguranca in '..\Fonte\uSeguranca.pas',
   uUtils in '..\Fonte\uUtils.pas',
-  Vcl.Themes,
-  Vcl.Styles,
   ufrmStandard in '..\Fonte\ufrmStandard.pas' {frmStandard},
   ufrmBasic in '..\Fonte\ufrmBasic.pas' {frmBasic},
   ufrmConexaoBD in '..\Fonte\ufrmConexaoBD.pas' {frmConexaoBD},
@@ -29,10 +29,9 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Ruby Graphite');
+  TStyleManager.TrySetStyle('Iceberg Classico');
   Application.CreateForm(TDMConexao, DMConexao);
-  Application.CreateForm(TfPrincipal, fPrincipal);
-  Application.CreateForm(TfrmConfigAPI, frmConfigAPI);
   Application.CreateForm(TDMApi, DMApi);
+  Application.CreateForm(TfPrincipal, fPrincipal);
   Application.Run;
 end.
