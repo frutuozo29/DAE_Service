@@ -8,29 +8,53 @@ type
   TLogExecucao = class
   private
     FArquivo: TStringList;
-
   public
-    constructor Create;
     procedure RegistrarLog(aLog: String);
     property Arquivo: TStringList read FArquivo write FArquivo;
   end;
 
+  function GetLog: TLogExecucao;
+
 implementation
+
+uses IwSystem;
+
+var
+  LogExecucao: TLogExecucao;
 
 { TLogExecucao }
 
-constructor TLogExecucao.Create;
-begin
-  Arquivo := TStringList.Create;
-end;
-
 procedure TLogExecucao.RegistrarLog(aLog: String);
+var
+  nomeArquivo: String;
 begin
-  if not Assigned(Arquivo) then
-    Arquivo := TStringList.Create;
+  try
+    nomeArquivo := gsAppPath + 'Log\log_' + FormatDateTime('dd_mm_yyyy', Now) + '.txt';
+    if not DirectoryExists(gsAppPath + 'Log\') then
+      ForceDirectories(gsAppPath + 'Log\');
 
-  Arquivo.Add(aLog);
-  Arquivo.SaveToFile('C:\Projetos\LogDeExecucao'+ DateToStr(Now));
+    Arquivo := TStringList.Create;
+    if FileExists(nomeArquivo) then
+      Arquivo.LoadFromFile(nomeArquivo);
+    Arquivo.Add('['+DateTimeToStr(Now)+'] ' + aLog);
+    Arquivo.SaveToFile(nomeArquivo);
+  finally
+    FreeAndNil(FArquivo);
+  end;
 end;
+
+function GetLog: TLogExecucao;
+begin
+  if not Assigned(LogExecucao) then
+    LogExecucao := TLogExecucao.Create;
+
+  Result := LogExecucao;
+end;
+
+initialization
+  LogExecucao := nil;
+
+finalization
+  FreeAndNil(LogExecucao);
 
 end.

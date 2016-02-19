@@ -33,7 +33,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDMConexao, REST.JSON, System.JSON, uClassesAPI;
+uses uDMConexao, REST.JSON, System.JSON, uClassesAPI, uLogExecucao;
 
 {$R *.dfm}
 
@@ -43,6 +43,7 @@ procedure TDMApi.AbreConsulta;
 begin
   QryConsulta.Close;
   QryConsulta.Open;
+  GetLog.RegistrarLog('Realizando consulta no banco de dados.');
 end;
 
 procedure TDMApi.EnviarJson(aJson: String);
@@ -51,6 +52,7 @@ var
   JsonToSend : TStringStream;
   Lista: TStringList;
 begin
+  GetLog.RegistrarLog('Enviando dados para o Web Service.');
   JsonToSend := TStringStream.Create( UTF8Encode(aJson) );
   Lista := TStringList.Create;
   try
@@ -63,21 +65,28 @@ begin
 
     except
       on E: Exception do
-        Lista.Add(E.Message);
+        GetLog.RegistrarLog('Ocorreu um erro ao enviar os dados. Fim da execução. Erro:'+E.Message);
     end;
   finally
-    Lista.SaveToFile('C:\projetos\Response.txt');
     FreeAndNil(JsonToSend);
+    Lista.SaveToFile('C:\projetos\Response.txt');
     FreeAndNil(Lista);
   end;
+  GetLog.RegistrarLog('Fim do envio dos dados para o Web Service.');
 end;
 
 procedure TDMApi.ExecutarIntegracao;
 begin
+  GetLog.RegistrarLog('Iniciando o processo de envio dos dados para o Web Service.');
   AbreConsulta;
   if QryConsulta.IsEmpty then
+  begin
+    GetLog.RegistrarLog('A Consulta não retornou resultado.');
     Exit;
+  end;
   PrepararEnviarJson;
+  GetLog.RegistrarLog('Fim do processo de envio dos dados para o Web Service.');
+  GetLog.RegistrarLog('-------------------------------------------------------');
 end;
 
 procedure TDMApi.PrepararEnviarJson;
@@ -85,12 +94,13 @@ var
   Empresa: String;
   ArrayJSon:TJSONArray;
   EmpresaNotas: TEmpresaNotas;
-  Lista: TStringList;
+//  Lista: TStringList;
 begin
   QryConsulta.First;
   try
     ArrayJson := TJSONArray.Create;
-    Lista := TStringList.Create;
+//    Lista := TStringList.Create;
+    GetLog.RegistrarLog('Iniciando a construção do Json que será enviado para o Web Service.');
     while not QryConsulta.Eof do
     begin
       if Empresa <> QryConsultaCGCCPF.AsString then
@@ -107,13 +117,14 @@ begin
       if (Empresa <> QryConsultaCGCCPF.AsString) or (QryConsulta.Eof) then
         ArrayJSon.AddElement(TJSON.ObjectToJsonObject(EmpresaNotas));
     end;
-    Lista.Add(ArrayJson.ToString);
-    Lista.SaveToFile('C:\Projetos\JsonEmpresa.json');
+//    Lista.Add(ArrayJson.ToString);
+//    Lista.SaveToFile('C:\Projetos\JsonEmpresa.json');
+    GetLog.RegistrarLog('Fim da construção do Json que será enviado para o Web Service.');
     EnviarJson(ArrayJson.ToString);
   finally
     FreeAndNil(EmpresaNotas);
     FreeAndNil(ArrayJSon);
-    FreeAndNil(Lista);
+//    FreeAndNil(Lista);
   end;
 end;
 

@@ -30,14 +30,11 @@ object fPrincipal: TfPrincipal
     TabOrder = 0
     object cpConfiguracoes: TCategoryPanel
       AlignWithMargins = True
-      Top = 39
-      Height = 30
+      Top = 120
+      Height = 177
       Caption = 'Configura'#231#245'es'
-      Collapsed = True
       TabOrder = 1
       OnExpand = onGrupoExpande
-      ExplicitTop = 120
-      ExpandedHeight = 111
       object btnConfigBD: TButton
         Left = 0
         Top = 0
@@ -58,18 +55,25 @@ object fPrincipal: TfPrincipal
         TabOrder = 1
         OnClick = btnConfigAPIClick
       end
+      object Button1: TButton
+        Left = 56
+        Top = 104
+        Width = 75
+        Height = 25
+        Caption = 'Button1'
+        TabOrder = 2
+        OnClick = Button1Click
+      end
     end
     object cpInicializacao: TCategoryPanel
       AlignWithMargins = True
       Top = 3
-      Height = 30
+      Height = 111
       BiDiMode = bdLeftToRight
       Caption = 'Inicializa'#231#227'o'
-      Collapsed = True
       ParentBiDiMode = False
       TabOrder = 0
       OnExpand = onGrupoExpande
-      ExpandedHeight = 111
       object btnIniciarServico: TButton
         Left = 0
         Top = 0
@@ -107,7 +111,7 @@ object fPrincipal: TfPrincipal
     Top = 8
   end
   object TimerExecucao: TTimer
-    Interval = 9000
+    Interval = 60000
     Left = 464
     Top = 32
   end

@@ -20,6 +20,7 @@ type
     btnConfigBD: TButton;
     btnConfigAPI: TButton;
     FDGUIxErrorDialog1: TFDGUIxErrorDialog;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure AppEventsMinimize(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
@@ -28,6 +29,7 @@ type
     procedure btnConfigAPIClick(Sender: TObject);
     procedure btnIniciarServicoClick(Sender: TObject);
     procedure btnPararServicoClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FFTDI: TFTDI;
@@ -84,6 +86,11 @@ begin
     GetAplicacao.StatusDoServico := False;
     Status;
   end;
+end;
+
+procedure TfPrincipal.Button1Click(Sender: TObject);
+begin
+  DMApi.ExecutarIntegracao;
 end;
 
 procedure TfPrincipal.FormCreate(Sender: TObject);
