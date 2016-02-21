@@ -11,8 +11,7 @@ inherited frmConfigAPI: TfrmConfigAPI
     end
   end
   inherited pnForm: TPanel
-    ExplicitTop = 44
-    object GroupBox1: TGroupBox
+    object gbConfEmail: TGroupBox
       Left = 9
       Top = 6
       Width = 434
@@ -27,7 +26,6 @@ inherited frmConfigAPI: TfrmConfigAPI
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 106
         object Label1: TLabel
           Left = 8
           Top = 9
@@ -48,6 +46,13 @@ inherited frmConfigAPI: TfrmConfigAPI
           Width = 34
           Height = 13
           Caption = 'Senha:'
+        end
+        object Label6: TLabel
+          Left = 217
+          Top = 60
+          Width = 30
+          Height = 13
+          Caption = 'Porta:'
         end
         object edtServidor: TEdit
           Left = 84
@@ -86,9 +91,16 @@ inherited frmConfigAPI: TfrmConfigAPI
           PasswordChar = '*'
           TabOrder = 3
         end
+        object edtPorta: TEdit
+          Left = 250
+          Top = 57
+          Width = 55
+          Height = 21
+          TabOrder = 4
+        end
       end
     end
-    object GroupBox2: TGroupBox
+    object gbConfGeral: TGroupBox
       Left = 9
       Top = 115
       Width = 434
@@ -104,10 +116,17 @@ inherited frmConfigAPI: TfrmConfigAPI
       end
       object lblExecucao: TLabel
         Left = 12
-        Top = 48
+        Top = 49
         Width = 71
         Height = 13
         Caption = 'Hora de Envio:'
+      end
+      object Label5: TLabel
+        Left = 180
+        Top = 49
+        Width = 99
+        Height = 13
+        Caption = 'Tentativas de Envio:'
       end
       object edtEmailsErro: TEdit
         Left = 86
@@ -125,6 +144,14 @@ inherited frmConfigAPI: TfrmConfigAPI
         Time = 0.333333333333333300
         Kind = dtkTime
         TabOrder = 1
+      end
+      object edtTentativas: TEdit
+        Left = 281
+        Top = 46
+        Width = 41
+        Height = 21
+        NumbersOnly = True
+        TabOrder = 2
       end
     end
   end

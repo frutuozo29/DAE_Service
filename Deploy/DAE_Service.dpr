@@ -22,7 +22,8 @@ uses
   uAplicacao in '..\Fonte\uAplicacao.pas',
   uDMApi in '..\Fonte\uDMApi.pas' {DMApi: TDataModule},
   uClassesAPI in '..\Fonte\uClassesAPI.pas',
-  uLogExecucao in '..\Fonte\uLogExecucao.pas';
+  uLogExecucao in '..\Fonte\uLogExecucao.pas',
+  uEnviaEmail in '..\Fonte\uEnviaEmail.pas';
 
 {$R *.res}
 

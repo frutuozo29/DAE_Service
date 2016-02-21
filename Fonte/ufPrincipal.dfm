@@ -97,6 +97,7 @@ object fPrincipal: TfPrincipal
     end
   end
   object AppEvents: TApplicationEvents
+    OnException = AppEventsException
     OnMinimize = AppEventsMinimize
     Left = 312
     Top = 8
@@ -111,7 +112,7 @@ object fPrincipal: TfPrincipal
     Top = 8
   end
   object TimerExecucao: TTimer
-    Interval = 60000
+    OnTimer = TimerExecucaoTimer
     Left = 464
     Top = 32
   end

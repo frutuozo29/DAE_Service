@@ -8,7 +8,7 @@ uses
 
 type
   TfrmConfigAPI = class(TfrmBasic)
-    GroupBox1: TGroupBox;
+    gbConfEmail: TGroupBox;
     Panel1: TPanel;
     Label1: TLabel;
     edtServidor: TEdit;
@@ -17,11 +17,15 @@ type
     edtUsuario: TEdit;
     Label3: TLabel;
     edtSenha: TEdit;
-    GroupBox2: TGroupBox;
+    gbConfGeral: TGroupBox;
     Label4: TLabel;
     edtEmailsErro: TEdit;
     lblExecucao: TLabel;
     dtpHora: TDateTimePicker;
+    Label5: TLabel;
+    edtTentativas: TEdit;
+    Label6: TLabel;
+    edtPorta: TEdit;
     procedure llbAjudaSMTPClick(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -92,7 +96,9 @@ begin
   edtUsuario.Text := TFuncoesIni.LerIni('CONFIGURACAO_API','UsuarioSmtp');
   edtSenha.Text := TFuncoesIni.LerIni('CONFIGURACAO_API','SenhaSmtp');
   edtEmailsErro.Text := TFuncoesIni.LerIni('CONFIGURACAO_API','EmailErro');
+  edtPorta.Text := TFuncoesIni.LerIni('CONFIGURACAO_API','PortaSmtp');
   dtpHora.Time := StrToTimeDef(TFuncoesIni.LerIni('CONFIGURACAO_API','HoraEnvio'), Now);
+  edtTentativas.Text := TFuncoesIni.LerIni('CONFIGURACAO_API', 'TentativasEnvio');
 end;
 
 procedure TfrmConfigAPI.SalvarConfiguracoes;
@@ -102,6 +108,8 @@ begin
   TFuncoesIni.GravarIni('CONFIGURACAO_API','SenhaSmtp', edtSenha.Text);
   TFuncoesIni.GravarIni('CONFIGURACAO_API','EmailErro', edtEmailsErro.Text);
   TFuncoesIni.GravarIni('CONFIGURACAO_API','HoraEnvio', TimeToStr(dtpHora.Time));
+  TFuncoesIni.GravarIni('CONFIGURACAO_API','TentativasEnvio', edtTentativas.Text);
+  TFuncoesIni.GravarIni('CONFIGURACAO_API','PortaSmtp', edtPorta.Text);
 end;
 
 end.

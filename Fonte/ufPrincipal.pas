@@ -30,6 +30,8 @@ type
     procedure btnIniciarServicoClick(Sender: TObject);
     procedure btnPararServicoClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure TimerExecucaoTimer(Sender: TObject);
+    procedure AppEventsException(Sender: TObject; E: Exception);
   private
     { Private declarations }
     FFTDI: TFTDI;
@@ -49,7 +51,14 @@ implementation
 
 {$R *.dfm}
 
-uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi, uRegistry, IwSystem;
+uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi, uRegistry, IwSystem, uFuncoesIni, System.DateUtils, uLogExecucao;
+
+procedure TfPrincipal.AppEventsException(Sender: TObject; E: Exception);
+begin
+  GetLog.RegistrarLog('----------------------------');
+  GetLog.RegistrarLog('Ocorreu um erro na aplicação. Erro: '+ E.Message);
+  GetLog.RegistrarLog('----------------------------');
+end;
 
 procedure TfPrincipal.AppEventsMinimize(Sender: TObject);
 begin
@@ -99,6 +108,24 @@ begin
   Status;
 
   TRegistro.RunOnStartup('DAEService', gsAppPath + gsAppName + '.exe');
+end;
+
+procedure TfPrincipal.TimerExecucaoTimer(Sender: TObject);
+var
+  HoraEnvio, DataHoraUltimoEnvio: TDateTime;
+begin
+  DataHoraUltimoEnvio := StrToDateTime( TFuncoesIni.LerIni('CONFIGURACAO_API', 'DataHoraUltimoEnvio', '0') );
+  HoraEnvio := StrToTimeDef(TFuncoesIni.LerIni('CONFIGURACAO_API','HoraEnvio'), Now);
+
+  if (DateOf(DataHoraUltimoEnvio) = DateOf(Now)) then
+    Exit;
+
+
+  if FormatDateTime('hh:mm', HoraEnvio) = FormatDateTime('hh:mm', now) then
+  begin
+    DMApi.ExecutarIntegracao;
+    TFuncoesIni.GravarIni('CONFIGURACAO_API', 'DataHoraUltimoEnvio', DateTimeToStr(Now));
+  end;
 end;
 
 procedure TfPrincipal.TrayIconDblClick(Sender: TObject);
