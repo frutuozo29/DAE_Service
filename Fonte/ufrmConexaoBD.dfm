@@ -38,6 +38,7 @@ inherited frmConexaoBD: TfrmConexaoBD
       Width = 23
       Height = 22
       Caption = '...'
+      OnClick = SpeedButton2Click
     end
     object Label1: TLabel
       Left = 5
@@ -102,5 +103,14 @@ inherited frmConexaoBD: TfrmConexaoBD
       TabOrder = 5
       OnClick = llbUsuarioPadraoClick
     end
+  end
+  object FileOpenDialog: TFileOpenDialog
+    DefaultFolder = 'C:\'
+    FavoriteLinks = <>
+    FileTypes = <>
+    OkButtonLabel = 'Selecionar'
+    Options = []
+    Left = 216
+    Top = 192
   end
 end

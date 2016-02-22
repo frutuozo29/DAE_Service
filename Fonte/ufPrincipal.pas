@@ -20,7 +20,6 @@ type
     btnConfigBD: TButton;
     btnConfigAPI: TButton;
     FDGUIxErrorDialog1: TFDGUIxErrorDialog;
-    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure AppEventsMinimize(Sender: TObject);
     procedure TrayIconDblClick(Sender: TObject);
@@ -29,7 +28,6 @@ type
     procedure btnConfigAPIClick(Sender: TObject);
     procedure btnIniciarServicoClick(Sender: TObject);
     procedure btnPararServicoClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure TimerExecucaoTimer(Sender: TObject);
     procedure AppEventsException(Sender: TObject; E: Exception);
   private
@@ -51,7 +49,8 @@ implementation
 
 {$R *.dfm}
 
-uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi, uRegistry, IwSystem, uFuncoesIni, System.DateUtils, uLogExecucao;
+uses ufrmConexaoBD, ufrmConfigAPI, uAplicacao, uDMApi, uRegistry, IwSystem, uFuncoesIni, System.DateUtils, uLogExecucao,
+  uDMConexao;
 
 procedure TfPrincipal.AppEventsException(Sender: TObject; E: Exception);
 begin
@@ -97,11 +96,6 @@ begin
   end;
 end;
 
-procedure TfPrincipal.Button1Click(Sender: TObject);
-begin
-  DMApi.ExecutarIntegracao;
-end;
-
 procedure TfPrincipal.FormCreate(Sender: TObject);
 begin
   FTDI := TFTDI.create(Self, TfInicio);
@@ -123,6 +117,12 @@ begin
 
   if FormatDateTime('hh:mm', HoraEnvio) = FormatDateTime('hh:mm', now) then
   begin
+    if not DMConexao.FDConn.Connected then
+    begin
+      GetLog.RegistrarLog('O Banco de dados está desconectado, não é possível enviar os dados.');
+      TFuncoesIni.GravarIni('CONFIGURACAO_API', 'DataHoraUltimoEnvio', DateTimeToStr(Now));
+      Exit;
+    end;
     DMApi.ExecutarIntegracao;
     TFuncoesIni.GravarIni('CONFIGURACAO_API', 'DataHoraUltimoEnvio', DateTimeToStr(Now));
   end;

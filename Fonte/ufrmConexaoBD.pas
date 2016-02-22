@@ -22,9 +22,11 @@ type
     Label1: TLabel;
     cbxTipobanco: TComboBox;
     llbUsuarioPadrao: TLinkLabel;
+    FileOpenDialog: TFileOpenDialog;
     procedure llbUsuarioPadraoClick(Sender: TObject);
     procedure btnConectarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,6 +81,15 @@ begin
         edtSenha.Text := 'masterkey';
       end;
     end;
+  end;
+end;
+
+procedure TfrmConexaoBD.SpeedButton2Click(Sender: TObject);
+begin
+  inherited;
+  if FileOpenDialog.Execute then
+  begin
+    edtCaminho.Text := FileOpenDialog.FileName;
   end;
 end;
 

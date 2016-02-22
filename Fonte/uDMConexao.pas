@@ -37,7 +37,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uMensagem, uFuncoesIni;
+uses uMensagem, uFuncoesIni, uLogExecucao;
 
 {$R *.dfm}
 
@@ -58,7 +58,7 @@ begin
     FDConn.Connected := True;
   Except
     on e: Exception do
-      TMensagem.Informar('Falha na Configuração do banco de dados!' + #13#10 + e.Message);
+      getLog.RegistrarLog('Falha na Configuração do banco de dados. Erro:' + e.Message);
   end;
 end;
 
