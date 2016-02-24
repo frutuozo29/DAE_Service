@@ -36,7 +36,6 @@ object fPrincipal: TfPrincipal
       Collapsed = True
       TabOrder = 1
       OnExpand = onGrupoExpande
-      ExplicitTop = 120
       ExpandedHeight = 111
       object btnConfigBD: TButton
         Left = 0

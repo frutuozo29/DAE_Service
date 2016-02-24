@@ -114,7 +114,6 @@ begin
   if (DateOf(DataHoraUltimoEnvio) = DateOf(Now)) then
     Exit;
 
-
   if FormatDateTime('hh:mm', HoraEnvio) = FormatDateTime('hh:mm', now) then
   begin
     if not DMConexao.FDConn.Connected then
