@@ -36,7 +36,8 @@ object fPrincipal: TfPrincipal
       Collapsed = True
       TabOrder = 1
       OnExpand = onGrupoExpande
-      ExpandedHeight = 111
+      ExplicitTop = 120
+      ExpandedHeight = 153
       object btnConfigBD: TButton
         Left = 0
         Top = 0
@@ -56,6 +57,16 @@ object fPrincipal: TfPrincipal
         Caption = 'Configura'#231#245'es da API'
         TabOrder = 1
         OnClick = btnConfigAPIClick
+      end
+      object btnSQL: TButton
+        Left = 0
+        Top = 82
+        Width = 190
+        Height = 41
+        Align = alTop
+        Caption = 'Configurar Consulta SQL'
+        TabOrder = 2
+        OnClick = btnSQLClick
       end
     end
     object cpInicializacao: TCategoryPanel

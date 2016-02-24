@@ -23,7 +23,8 @@ uses
   uDMApi in '..\Fonte\uDMApi.pas' {DMApi: TDataModule},
   uClassesAPI in '..\Fonte\uClassesAPI.pas',
   uLogExecucao in '..\Fonte\uLogExecucao.pas',
-  uEnviaEmail in '..\Fonte\uEnviaEmail.pas';
+  uEnviaEmail in '..\Fonte\uEnviaEmail.pas',
+  ufrmSqlConsulta in '..\Fonte\ufrmSqlConsulta.pas' {frmSqlConsulta};
 
 {$R *.res}
 

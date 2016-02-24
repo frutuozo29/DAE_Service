@@ -34,7 +34,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uDMConexao, REST.JSON, System.JSON, uClassesAPI, uLogExecucao, uFuncoesIni, uEnviaEmail;
+uses uDMConexao, REST.JSON, System.JSON, iwSystem, uClassesAPI, uLogExecucao, uFuncoesIni, uEnviaEmail;
 
 {$R *.dfm}
 
@@ -43,7 +43,18 @@ uses uDMConexao, REST.JSON, System.JSON, uClassesAPI, uLogExecucao, uFuncoesIni,
 procedure TDMApi.AbreConsulta;
 begin
   QryConsulta.Close;
-  QryConsulta.Open;
+  if FileExists(gsAppPath+ '\Consulta.sql') then
+  begin
+    QryConsulta.SQL.LoadFromFile(gsAppPath+ '\Consulta.sql');
+    try
+      QryConsulta.Open;
+    except
+      on e: Exception do
+        GetLog.RegistrarLog('Erro ao Abrir SQL. Erro: '+ E.Message);
+    end;
+  end
+  else
+    GetLog.RegistrarLog('SQL de consulta não foi encontrado na pasta da aplicação.');
   GetLog.RegistrarLog('Realizando consulta no banco de dados.');
 end;
 
